@@ -1,4 +1,5 @@
 import random
+import string
 import sys
 import uuid
 from ppy_common import PPyCException
@@ -22,6 +23,11 @@ class PyCommon:
     def get_random_6digit():
         random_number = random.randint(0, 999999)
         return "{:06d}".format(random_number)
+
+    @staticmethod
+    def get_random_string(length: int = 5) -> str:
+        random_string = ''.join(random.choices(string.ascii_lowercase + string.digits, k=length))
+        return random_string
 
     @staticmethod
     def import_from_string(import_name: str, silent: bool = False):
