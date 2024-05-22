@@ -1,5 +1,6 @@
 import subprocess
 import click
+from terminaltables import AsciiTable
 
 
 class Console:
@@ -61,3 +62,24 @@ class Console:
     def run(command, home, env=None):
         response = subprocess.run(command, shell=True, cwd=home, env=env)
         return response
+
+    @staticmethod
+    def table(header: list, row: list = None, row_object_list=None, object_key: list = None, title: str = None, modify_callback=None, is_print: bool = True) -> AsciiTable:
+        table_data: list = [header]
+        if row_object_list and object_key:
+            for object_row in row_object_list:
+                object_list = []
+                for key in object_key:
+                    if hasattr(object_row, key) and getattr(object_row, key):
+                        object_list.append(str(getattr(object_row, key)))
+                table_data.append(object_list)
+        elif row:
+            table_data = table_data + row
+
+        table_instance = AsciiTable(table_data=table_data, title=title)
+        if modify_callback:
+            modify_callback(table_instance)
+
+        if is_print:
+            print(table_instance.table)
+        return table_instance
