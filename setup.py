@@ -19,7 +19,7 @@ def get_dependencies():
 
 setup(
     name='ppy-common',
-    version='0.0.7',
+    version='0.0.8',
     url='https://github.com/banglafighter/ppy-common',
     license='Apache 2.0',
     author='Bangla Fighter',
