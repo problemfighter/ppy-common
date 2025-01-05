@@ -14,6 +14,13 @@ class DateUtil:
         return None
 
     @staticmethod
+    def string_datetime_to_datetime(string_date: str, date_format: str = "%d/%m/%Y %H:%M:%S"):
+        date_time_data = datetime.strptime(string_date, date_format)
+        if date_time_data:
+            return date_time_data
+        return None
+
+    @staticmethod
     def diff_min_hour_day_full(previous: datetime, current: datetime = None, str_format="%d %b %Y at %H:%M:%S", date_format_after=30, day="d", hour="h", min="m") -> str:
         date_time = "1" + min
         if not current:
